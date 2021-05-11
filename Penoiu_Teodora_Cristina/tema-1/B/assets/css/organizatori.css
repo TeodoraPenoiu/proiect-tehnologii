@@ -1,0 +1,9 @@
+.image-dimension {
+    height: 180px;
+    object-fit: cover;
+}
+
+.table-border {
+    border: 5px ridge #f2f2f2;
+    width: fit-content;
+}

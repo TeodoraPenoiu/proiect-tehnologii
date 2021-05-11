@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FISA SYSTEM "fisa-inscriere.dtd">
+
+<FISA>
+    <ELEV cnp="1234567891234">
+        <NUME>Popescu</NUME>
+        <PRENUME>Maria</PRENUME>
+        <CLASA sectiune="incepator">5</CLASA>
+        <EMAIL>popescu_mariaabcd@yahoo.com</EMAIL>
+    </ELEV>
+</FISA>

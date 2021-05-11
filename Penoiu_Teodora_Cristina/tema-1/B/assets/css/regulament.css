@@ -1,0 +1,52 @@
+.page-title {
+    font-size: 35px;
+    font-family: "Times New Roman", serif;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(64, 64, 64);
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
+.page-information {
+    margin-top: 40px;
+}
+
+.page-information > * {
+    font-family: "Times New Roman", serif;
+    color: rgb(64, 64, 64);
+}
+
+.page-information > .page-second-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.paragraph {
+    margin: 8px 0 8px 0;
+}
+
+.page-third-title {
+    font-weight: bold;
+    font-size: 19px;
+    margin-top: 20px;
+}
+
+a:link {
+    padding: 0;
+    margin-bottom: 0;
+    color: black;
+    background-color: transparent;
+    border-bottom: .25rem solid transparent;
+    margin-left: 10px;
+}
+
+.align-text-center {
+    text-align: center;
+}
+
+.page-table {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
