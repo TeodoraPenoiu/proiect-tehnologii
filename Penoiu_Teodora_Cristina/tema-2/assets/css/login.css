@@ -1,0 +1,38 @@
+.put-middle {
+    margin: 0 auto!important;
+    width: 100vh;
+}
+
+.text-checkbox {
+    font-size: 13px;
+}
+
+.box-shadow {
+    border: 1px solid rgba(0,0,0,.125);
+    padding: 30px 150px 30px 150px;
+}
+
+table {
+    border-collapse: initial!important;
+    border-spacing: 5px;
+}
+
+.align-text-center {
+    text-align: center;
+}
+
+.page-title {
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(64, 64, 64);
+    margin-top: 15px;
+}
+
+.page-second-title {
+    font-size: 15px;
+    color: rgb(64, 64, 64);
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
