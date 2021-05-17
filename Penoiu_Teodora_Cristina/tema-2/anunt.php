@@ -65,7 +65,6 @@
                     echo "<div class='error container'>Stergere esuata.</div>";
                 }
                 break;
-
         }
     }
 ?>
@@ -100,8 +99,6 @@ function deleteMesaj($id) {
 }
 ?>
 
-
-
 <?php
 /** Afisarea mesajelor din guestbook */
 $query = "SELECT id, titlu, paragraf FROM anunturi";
@@ -112,6 +109,7 @@ if (mysqli_num_rows($result)) {
         $vparagraf = htmlspecialchars($row['paragraf']);
         echo '<div class="noutate-container">';
         print("<a href='anunt.php?comanda=delete&id=". $row['id']."'>Delete</a>\n");
+        print("<a href='edit.php?id=". $row['id']."'>Editeaza</a>\n");
 
         echo '<div><img class="image-wrapper float-start" src="assets/img/exclamation-mark.jpg" alt="poza cu un semn al exclamarii"></div>
 <div class="float-md-end noutate-content"><h2 class="page-third-title mb-3 mt-0">';
@@ -124,7 +122,7 @@ if (mysqli_num_rows($result)) {
 ?>
 
 <div class="container">
-    <div class="float-start mt-5">
+    <div class="mt-5">
         <h2>Lasa un mesaj</h2>
         <!-- Forma de adaugare mesaj-->
         <form action="anunt.php" method="post">
@@ -139,7 +137,6 @@ if (mysqli_num_rows($result)) {
             <input type="submit" value="Adauga" />
         </form>
     </div>
-
 </div>
 
 <?php
