@@ -17,16 +17,16 @@ if (!empty($comanda)) {
 //TODO: Aici trebuie adaugat cod ce valideaza datele.
 
             if($clasa == 5 || $clasa == 6)
-                $sql="INSERT INTO clasele5_6(nume, prenume, clasa, email, parola) VALUES ('$nume', '$prenume', '$clasa', 'email', '$parola')";
+                $sql="INSERT INTO clasele5_6(nume, prenume, clasa, email, parola) VALUES ('$nume', '$prenume', '$clasa', '$email', '$parola')";
 
             if($clasa == 7 || $clasa == 8)
-                $sql="INSERT INTO clasele7_8(nume, prenume, clasa, email, parola) VALUES ('$nume', '$prenume', '$clasa', 'email', '$parola')";
+                $sql="INSERT INTO clasele7_8(nume, prenume, clasa, email, parola) VALUES ('$nume', '$prenume', '$clasa', '$email', '$parola')";
 
             if($clasa == 9 || $clasa == 10)
-                $sql="INSERT INTO clasele9_10(nume, prenume, clasa, email, parola) VALUES ('$nume', '$prenume', '$clasa', 'email', '$parola')";
+                $sql="INSERT INTO clasele9_10(nume, prenume, clasa, email, parola) VALUES ('$nume', '$prenume', '$clasa', '$email', '$parola')";
 
             if($clasa == 11 || $clasa == 12)
-                $sql="INSERT INTO clasele11_12(nume, prenume, clasa, email, parola) VALUES ('$nume', '$prenume', '$clasa', 'email', '$parola')";
+                $sql="INSERT INTO clasele11_12(nume, prenume, clasa, email, parola) VALUES ('$nume', '$prenume', '$clasa', '$email', '$parola')";
 
             $connect = $conexiune;
             if (!mysqli_query($connect, $sql)) {

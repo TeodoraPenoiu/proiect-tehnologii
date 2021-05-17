@@ -14,11 +14,10 @@
     if(mysqli_num_rows($result)) {
         print("<table>\n");
         print("<tr>\n");
-        print("<th>NrCRT</th><th>Nume</th><th>Prenume</th><th>Clasa</th>");
+        print("<th>Nume</th><th>Prenume</th><th>Clasa</th>");
         print("</tr>\n");
         while($row = mysqli_fetch_array($result)){
             print("<tr>\n");
-            print("<td>" . $row['id']. "</td>\n");
             print("<td>" . $row['nume']. "</td>\n");
             print("<td>" . $row['prenume']. "</td>\n");
             print("<td>" . $row['clasa']. "</td>\n");
@@ -42,11 +41,10 @@
     if(mysqli_num_rows($result)) {
         print("<table>\n");
         print("<tr>\n");
-        print("<th>NrCRT</th><th>Nume</th><th>Prenume</th><th>Clasa</th>");
+        print("<th>Nume</th><th>Prenume</th><th>Clasa</th>");
         print("</tr>\n");
         while($row = mysqli_fetch_array($result)){
             print("<tr>\n");
-            print("<td>" . $row['id']. "</td>\n");
             print("<td>" . $row['nume']. "</td>\n");
             print("<td>" . $row['prenume']. "</td>\n");
             print("<td>" . $row['clasa']. "</td>\n");
@@ -70,11 +68,10 @@
     if(mysqli_num_rows($result)) {
         print("<table>\n");
         print("<tr>\n");
-        print("<th>NrCRT</th><th>Nume</th><th>Prenume</th><th>Clasa</th>");
+        print("<th>Nume</th><th>Prenume</th><th>Clasa</th>");
         print("</tr>\n");
         while($row = mysqli_fetch_array($result)){
             print("<tr>\n");
-            print("<td>" . $row['id']. "</td>\n");
             print("<td>" . $row['nume']. "</td>\n");
             print("<td>" . $row['prenume']. "</td>\n");
             print("<td>" . $row['clasa']. "</td>\n");

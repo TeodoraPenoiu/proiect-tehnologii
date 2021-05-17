@@ -2,12 +2,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscrie-te la concurs!</title>
+    <title>X</title>
 
     <link rel="stylesheet" href="../tema-1/B/assets/css/home.css">
     <link rel="stylesheet" href="assets/css/login.css">
-    <link rel="stylesheet" href="assets/css/regulament.css">
-    <link rel="stylesheet" href="assets/css/subiecte.css">
+    <link rel="stylesheet" href="../tema-1/B/assets/css/regulament.css">
+    <link rel="stylesheet" href="../tema-1/B/assets/css/subiecte.css">
+    <link rel="stylesheet" href="../tema-1/B/assets/css/noutati.css">
 
     <!-- Bootstrap core CSS -->
     <link href="assets/libs/bootstrap-5.0.0/css/bootstrap.min.css" rel="stylesheet">
