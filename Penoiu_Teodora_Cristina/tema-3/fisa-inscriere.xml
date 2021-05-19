@@ -5,7 +5,8 @@
     <ELEV cnp="1234567891234">
         <NUME>Popescu</NUME>
         <PRENUME>Maria</PRENUME>
-        <CLASA sectiune="incepator">5</CLASA>
+        <CLASA>5</CLASA>
+        <SECTIUNEA>incepator</SECTIUNEA>
         <EMAIL>popescu_mariaabcd@yahoo.com</EMAIL>
     </ELEV>
 </FISA>

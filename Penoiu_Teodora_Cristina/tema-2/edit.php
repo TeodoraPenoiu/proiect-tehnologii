@@ -1,6 +1,6 @@
 <?php
 
-include "connect.php"; // Using database connection file here
+include "inc/connect.php"; // Using database connection file here
 
 $id = $_GET['id']; // get id through query string
 
@@ -18,7 +18,7 @@ if(isset($_POST['update'])) // when click on Update button
     if($edit)
     {
         mysqli_close($conexiune); // Close connection
-        header("location:anunt.php"); // redirects to all records page
+        header("location:index.php"); // redirects to all records page
         exit;
     }
     else

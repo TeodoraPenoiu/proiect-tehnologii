@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>X</title>
+    <title>Noutati</title>
 
     <link rel="stylesheet" href="../tema-1/B/assets/css/home.css">
     <link rel="stylesheet" href="assets/css/login.css">
@@ -32,7 +32,7 @@
                     <li><a class="dropdown-item" href="participanti.php">Participanti</a></li>
                     <li><a class="dropdown-item" href="../tema-1/B/subiecte.html">Subiecte</a></li>
                     <li><a class="dropdown-item" href="rezultate.php">Rezultate</a></li>
-                    <li><a class="dropdown-item" href="login.php">Intra in cont</a></li>
+                    <li><a class="dropdown-item" href="admin/index.php">Intra in cont</a></li>
                     <li><a class="dropdown-item" href="inscriere.php">Inscriete-te!</a></li>
                 </ul>
             </div>
@@ -43,61 +43,7 @@
 <main>
 
 <?php
-    require_once "connect.php";
-?>
-
-<?php
-    /* Definim si initializam cu sirul vid variabilele */
-    $title = "";
-    $paragraph = "";
-
-    /* Presupunem ca nu avem erori de validare a parametrilor */
-    $eroareTitlu = "";
-    $eroareParagraf = "";
-
-    $comanda = isset($_REQUEST["comanda"]) ? $_REQUEST["comanda"] : NULL;
-    if (isset($comanda)) {
-        switch ($comanda) {
-            case 'add':
-                //Preluam parametri trimisi din forma de adaugare.
-                $title = isset($_REQUEST["titlu"]) ? $_REQUEST["titlu"] : NULL;
-                $paragraph = isset($_REQUEST["paragraf"]) ? $_REQUEST["paragraf"] : NULL;
-
-                //Validam parametri primiti.
-                $valid = true;
-                if (empty($title)) {
-                    $eroareTitlu = "Titlul nu poate fi vid!";
-                    $valid = false;
-                }
-                if (empty($paragraph)) {
-                    $eroareParagraf = "Mesajul nu poate fi vid!";
-                    $valid = false;
-                }
-                if ($valid) {
-
-                    $stmt=mysqli_prepare ($conexiune,
-
-                        "INSERT INTO anunturi(titlu, paragraf) VALUES (?, ?)");
-                    if (!mysqli_stmt_bind_param($stmt, "ss",$title, $paragraph)) {
-                        die('Eroare legare parametri: ' . mysqli_stmt_error($stmt));
-                    }
-                    if (! mysqli_stmt_execute($stmt)) {
-                        die('Eroare : ' . mysqli_stmt_error($stmt));
-                    }
-                    mysqli_stmt_close($stmt);
-                    $title = $paragraph = "";
-                    echo "<div class='succes container'>Paragraful a fost adaugat cu succes in baza de date.</div>";
-                }
-                break;
-
-            case 'delete':
-                $id = $_REQUEST["id"];
-                if (!deleteMesaj($id)) {
-                    echo "<div class='error container'>Stergere esuata.</div>";
-                }
-                break;
-        }
-    }
+    require_once "inc/connect.php";
 ?>
 
 <div class="container">
@@ -114,21 +60,6 @@
     </div>
 </div>
 
-<?php
-function deleteMesaj($id) {
-    global $conexiune;
-    if (is_numeric($id)) {
-        $sql = sprintf("DELETE FROM anunturi WHERE id=%d", $id);
-//echo "Query: $sql <br>";
-        if (!mysqli_query($conexiune, $sql)) {
-            die('Error: ' . mysqli_error($conexiune));
-        }
-        return TRUE;
-    } else {
-        return FALSE;
-    }
-}
-?>
 
 <?php
 /** Afisarea mesajelor din guestbook */
@@ -139,9 +70,6 @@ if (mysqli_num_rows($result)) {
         $vtitlu = htmlspecialchars($row['titlu']);
         $vparagraf = htmlspecialchars($row['paragraf']);
         echo '<div class="noutate-container">';
-        print("<a href='anunt.php?comanda=delete&id=". $row['id']."'>Delete</a>\n");
-        print("<a href='edit.php?id=". $row['id']."'>Editeaza</a>\n");
-
         echo '<div><img class="image-wrapper float-start" src="assets/img/exclamation-mark.jpg" alt="poza cu un semn al exclamarii"></div>
 <div class="float-md-end noutate-content"><h2 class="page-third-title mb-3 mt-0">';
         printf($vtitlu);
@@ -152,24 +80,15 @@ if (mysqli_num_rows($result)) {
 }
 ?>
 
-<div class="container">
-    <div class="mt-5">
-        <h2>Lasa un mesaj</h2>
-        <!-- Forma de adaugare mesaj-->
-        <form action="anunt.php" method="post">
-            <input name="comanda" type="hidden" value="add" />
-            <p>Titlu:
-                <input type="text" name="titlu" value="<?php echo htmlspecialchars($title); ?>" size="30">
-                <span class="error"><?php echo $eroareTitlu; ?></span>
-            </p>
-            <p>Paragraf: <span class="error"><?php echo $eroareParagraf; ?></span><br />
-                <textarea name="paragraf" rows="5" cols="60"><?php echo htmlspecialchars($paragraph); ?></textarea>
-            </p>
-            <input type="submit" value="Adauga" />
-        </form>
-    </div>
-</div>
+</main>
 
-<?php
-    include "footer.php";
-?>
+<footer class="mt-auto footer-background footer-display">
+    <div class="container">
+        <h3 class="footer-title">DESPRE CONCURS</h3>
+        <p class="footer-text flex-direction">Concursul este destinat tuturor elevilor de gimnaziu și liceu<br> care se pot încadra în probele concursului. Un elev poate<br> participa la una sau mai multe probe.</p>
+        <p class="footer-text float-md-end"> &copy;Penoiu Teodora Cristina </p>
+    </div>
+</footer>
+
+</body>
+</html>

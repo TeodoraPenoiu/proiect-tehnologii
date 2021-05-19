@@ -29,10 +29,9 @@
                     <li><a class="dropdown-item" href="../tema-1/B/sponsori.html">Sponsori</a></li>
                     <li><a class="dropdown-item" href="../tema-1/B/organizatori.html">Organizatori</a></li>
                     <li><a class="dropdown-item" href="anunt.php">Noutati</a></li>
-                    <li><a class="dropdown-item" href="participanti.php">Participanti</a></li>
                     <li><a class="dropdown-item" href="../tema-1/B/subiecte.html">Subiecte</a></li>
                     <li><a class="dropdown-item" href="rezultate.php">Rezultate</a></li>
-                    <li><a class="dropdown-item" href="login.php">Intra in cont</a></li>
+                    <li><a class="dropdown-item" href="admin/index.php">Intra in cont</a></li>
                     <li><a class="dropdown-item" href="inscriere.php">Inscriete-te!</a></li>
                 </ul>
             </div>
@@ -43,7 +42,7 @@
 <main>
 
 <?php
-    require_once "connect.php";
+    require_once "inc/connect.php";
 ?>
 
 <div class="container">
@@ -78,7 +77,7 @@
     <h1 class="page-title">Elevii din clasele 7-8 inscrisi la concurs:</h1>
     <div class="box-shadow mb-3">
     <?php
-    /** Afisarea numerelor din agenda */
+    /** Afisarea participantilor */
     $query = "SELECT * FROM clasele7_8";
     $result = mysqli_query($conexiune, $query);
     if(mysqli_num_rows($result)) {
@@ -132,7 +131,7 @@
     <h1 class="page-title">Elevii din clasele 11-12 inscrisi la concurs:</h1>
     <div class="box-shadow mb-3 page-table align-middle">
     <?php
-    /** Afisarea numerelor din agenda */
+    /** Afisarea participantilor din clasele 11-12 */
     $query = "SELECT * FROM clasele11_12";
     $result = mysqli_query($conexiune, $query);
     if(mysqli_num_rows($result)) {
@@ -157,5 +156,5 @@
 </div>
 
 <?php
-    include "footer.php";
+    include "inc/footer.php";
 ?>

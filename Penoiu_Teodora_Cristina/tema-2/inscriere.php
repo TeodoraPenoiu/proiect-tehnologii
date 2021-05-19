@@ -32,8 +32,7 @@
                     <li><a class="dropdown-item" href="participanti.php">Participanti</a></li>
                     <li><a class="dropdown-item" href="../tema-1/B/subiecte.html">Subiecte</a></li>
                     <li><a class="dropdown-item" href="rezultate.php">Rezultate</a></li>
-                    <li><a class="dropdown-item" href="login.php">Intra in cont</a></li>
-                    <li><a class="dropdown-item" href="inscriere.php">Inscriete-te!</a></li>
+                    <li><a class="dropdown-item" href="admin/index.php">Intra in cont</a></li>
                 </ul>
             </div>
         </nav>
@@ -43,7 +42,7 @@
 <main>
 
 <?php
-    require_once "connect.php";
+    require_once "inc/connect.php";
 ?>
 
 <?php
@@ -118,5 +117,5 @@ if (!empty($comanda)) {
 </form>
 
 <?php
-    include "footer.php";
+    include "inc/footer.php";
 ?>
