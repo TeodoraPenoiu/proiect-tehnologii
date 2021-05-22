@@ -10,12 +10,5 @@
                 <input id="password" type="password" placeholder="PAROLA" name="password"">
             </div>
             <input type="submit" value="Login" class="btn btn-primary mb-3 w-100">
-            <div class="mb-3">
-                <a href="#">Ai uitat parola?</a>
-            </div>
-            <div class="text-checkbox">
-                <input type="checkbox">
-                <span>Retine email-ul si parola.</span>
-            </div>
         </form>
 </div>

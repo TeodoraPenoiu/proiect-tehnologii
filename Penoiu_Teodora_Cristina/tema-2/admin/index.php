@@ -25,32 +25,6 @@
 
     <script src="../validare.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        function validezaForm1() {
-            var frm = document.adauga_anunt;
-            var valid = true;
-            if (frm.titlu.value.length < 2) {
-                alert("Titlul trebuie sa aiba minim 2 caractere");
-                frm.nume.focus();
-                valid = false;
-            } else if (frm.titlu.value.length > 30) {
-                alert("Titlul trebuie sa aiba maxim 20 caractere");
-                frm.nume.focus();
-                valid = false;
-            }
-            if (frm.paragraf.value.length < 10) {
-                alert("Continutul trebuie sa aiba minim 10 caractere");
-                frm.nume.focus();
-                valid = false;
-            } else if (frm.paragraf.value.length > 30) {
-                alert("Continutul trebuie sa aiba maxim 20 caractere");
-                frm.nume.focus();
-                valid = false;
-            }
-            return valid;
-        }
-    </script>
-
 </head>
 
 <body>
@@ -193,7 +167,7 @@ if (isset($comanda)) {
                 $sub_1 = isset($_REQUEST["sub_1"]) ? $_REQUEST["sub_1"] : NULL;
                 $sub_2 = isset($_REQUEST["sub_2"]) ? $_REQUEST["sub_2"] : NULL;
                 $sub_3 = isset($_REQUEST["sub_3"]) ? $_REQUEST["sub_3"] : NULL;
-                $general = $sub_1 + $sub_2 + $sub_3;
+                $general = ($sub_1 + $sub_2 + $sub_3)/3;
 
                 //Validam parametri primiti.
                 $valid = true;
@@ -259,9 +233,10 @@ if (isset($comanda)) {
                     $sub_1_1 = $_POST['sub_1'];
                     $sub_2_1 = $_POST['sub_2'];
                     $sub_3_1 = $_POST['sub_3'];
+                    $zece = 10;
 
                     $edit = mysqli_query($conexiune, "update rezultate set nume='$nume1', prenume='$prenume1',
-                     sub_1 = $sub_1_1, sub_2 = $sub_2_1, sub_3 = $sub_3_1, general = $sub_1_1 + $sub_2_1 + $sub_3_1 where id='$id'");
+                     sub_1 = $sub_1_1, sub_2 = $sub_2_1, sub_3 = $sub_3_1, general = ($sub_1_1 + $sub_2_1 + $sub_3_1)/3 where id='$id'");
 
                     if($edit)
                     {
@@ -321,6 +296,10 @@ if (isset($comanda)) {
             print("</div></header>");
             include "login.php";
         } else {
+            print("<header class='mb-auto'>");
+            print("<div class='container'>");
+            print("<img src='../../tema-1/B/assets/img/logo.png' class='header-logo' alt='sigla concurs'>");
+            print("</div></header>");
             print("<div class='container'>");
             print("<a class='nav-link align-text-center page-title' data-bs-toggle='collapse' href='#anunturi' aria-expanded='false'><h1>Anunturi</h1>");
             print("<div class='collapse' id='anunturi'>");
@@ -345,16 +324,16 @@ if (isset($comanda)) {
             print("<div class='container'>");
             print("<div class='float-start'>");
             print("<a class='nav-link' data-bs-toggle='collapse' href='#adauga-anunturi' aria-expanded='false'><h2>Adauga un anunt</h2></a>");
-            print("<form name='adauga_anunt' onsubmit='return validezaForm1()' class='collapse' action='' method='post' id='adauga-anunturi'>");
+            print("<form name='adauga_anunt' class='collapse error' action='' method='post' id='adauga-anunturi'>");
             print("<input name='comanda' type='hidden' value='add-anunturi'>");
             print("<p>Titlu:");
-            print("<input type='text' name='titlu' value='");
+            print("<input type='text' name='titlu' onkeyup='validationText(this)' id='titlu-anunt' value='");
             print(htmlspecialchars($title));
             print("' size='30'>");
             print("<span class='error'><?php echo $eroareTitlu; ?></span>");
             print("</p>");
             print("<p>Paragraf: <span class='error'><?php echo $eroareParagraf; ?></span><br />");
-            print("<textarea name='paragraf' rows='5' cols='60'>");
+            print("<textarea name='paragraf' rows='5' cols='60' onkeyup='validationContinut(this)' id='continut'>");
             print(htmlspecialchars($paragraph));
             print("</textarea>");
             print("</p>");
@@ -366,14 +345,14 @@ if (isset($comanda)) {
             print("<form class='collapse' action='' method='POST' id='update-anunturi'>");
             print("<p>Titlu:<br>");
             if(!empty($data)) {
-                print("<input type='text' name='titlu' value='");
+                print("<input type='text' onkeyup='validationTitlu(this)' name='titlu' value='");
                 print($data['titlu']);
                 print("'>");
             }
             print("</p>");
             print("<p>Continut:<br>");
             if(!empty($data)) {
-                print("<input type='text' name='paragraf' value='");
+                print("<input type='text' onkeyup='validationContinut(this)' name='paragraf' value='");
                 print($data['paragraf']);
                 print("'>");
             }
@@ -426,7 +405,7 @@ if (isset($comanda)) {
             print("<form class='collapse' action='' method='post' id='add-data'>");
             print("<input name='comanda' type='hidden' value='add-rezultate'>");
             print("<p>Nume:<br>");
-            print("<input type='text' name='nume' value='");
+            print("<input type='text' name='nume' onkeyup='validationText(this)' value='");
             print(htmlspecialchars($nume));
             print("' size='30'>");
             print("<span class='error'>");
@@ -434,7 +413,7 @@ if (isset($comanda)) {
             print("</span>");
             print("</p>");
             print("<p>Prenume:<br>");
-            print("<input type='text' name='prenume' value='");
+            print("<input type='text' name='prenume' onkeyup='validationText(this)' value='");
             print(htmlspecialchars($prenume));
             print("' size='30'>");
             print("<span class='error'>");
@@ -442,7 +421,7 @@ if (isset($comanda)) {
             print("</span>");
             print("</p>");
             print("<p>Nota la subiectul I:<br>");
-            print("<input type='text' name='sub_1' value='");
+            print("<input type='text' name='sub_1' onkeyup='validationNota(this)' value='");
             print(htmlspecialchars($sub_1));
             print("' size='30'>");
             print("<span class='error'>");
@@ -450,13 +429,13 @@ if (isset($comanda)) {
             print("</span>");
             print("</p>");
             print("<p>Nota la subiectul II:<br>");
-            print("<input type='text' name='sub_2' value='");
+            print("<input type='text' name='sub_2' onkeyup='validationNota(this)' value='");
             print(htmlspecialchars($sub_2));
             print("' size='30'>");
             print("<span class='error'><?php echo $eroareSub2; ?></span>");
             print("</p>");
             print("<p>Nota la subiectul III:<br>");
-            print("<input type='text' name='sub_3' value='");
+            print("<input type='text' name='sub_3' onkeyup='validationNota(this)' value='");
             print(htmlspecialchars($sub_3));
             print("' size='30'>");
             print("<span class='error'>");
@@ -471,31 +450,31 @@ if (isset($comanda)) {
             print("<form class='collapse' action='' method='POST' id='update-data'>");
             print("<p>Nume:<br>");
             if(!empty($data)) {
-                print("<input type='text' name='nume' value='");
+                print("<input type='text' onkeyup='validationText(this)' name='nume' value='");
                 print($data['nume']);
                 print("' placeholder='...' size='30'>");
             }
             print("</p>Prenume:<br>");
             if(!empty($data)) {
-                print("<input type='text' name='prenume' value='");
+                print("<input type='text' onkeyup='validationContinut(this)' name='prenume' value='");
                 print($data['prenume']);
                 print("' placeholder='...' size='30'>");
             }
             print("</p>Nota la subiectul I:<br>");
             if(!empty($data)) {
-                print("<input type='text' name='sub_1' value='");
+                print("<input type='text' onkeyup='validationNota(this)' name='sub_1' value='");
                 print($data['sub_1']);
                 print("' placeholder='...' size='30'>");
             }
             print("</p>Nota la subiectul II:<br>");
             if(!empty($data)) {
-                print("<input type='text' name='sub_2' value='");
+                print("<input type='text' onkeyup='validationNota(this)' name='sub_2' value='");
                 print($data['sub_2']);
                 print("' placeholder='...' size='30'>");
             }
             print("</p>Nota la subiectul III:<br>");
             if(!empty($data)) {
-                print("<input type='text' name='sub_3' value='");
+                print("<input type='text' onkeyup='validationNota(this)' name='sub_3' value='");
                 print($data['sub_3']);
                 print("' placeholder='...' size='30'>");
             }

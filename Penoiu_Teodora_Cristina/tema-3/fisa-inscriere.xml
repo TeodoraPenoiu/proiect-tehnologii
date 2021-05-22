@@ -2,14 +2,13 @@
 <!DOCTYPE FISA SYSTEM "fisa-inscriere.dtd">
 
 <FISA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="fisa-inscriere.xsd">
-    <NUME_FACULTATE>Facultatea de Stiinte</NUME_FACULTATE>
     <CANDIDAT cnp="1234567891234">
         <NUME>Popescu</NUME>
         <PRENUME>Maria</PRENUME>
         <SEXUL>F</SEXUL>
         <NATIONALITATE>ROMANA</NATIONALITATE>
         <INITIALA_TATA>M</INITIALA_TATA>
-        <DATA_NASTERII>5-11-1998</DATA_NASTERII>
+        <DATA_NASTERII>1998-11-05</DATA_NASTERII>
         <TELEFON>0770563250</TELEFON>
         <EMAIL>popescu_maria98@yahoo.com</EMAIL>
         <ADRESA>
@@ -26,7 +25,7 @@
             <NOTA disciplina="biologie" examinare="scris">9</NOTA>
             <MEDIA_GENERALA>9</MEDIA_GENERALA>
         </BACALAUREAT>
-        <SPECIALIZARE>INFORMATICA</SPECIALIZARE>
+        <FACULTATE>INFORMATICA</FACULTATE>
         <OPTIUNE_INSCRIERE>buget</OPTIUNE_INSCRIERE>
         <MODUL_PSIHOPEDAGOGIC>NU</MODUL_PSIHOPEDAGOGIC>
     </CANDIDAT>

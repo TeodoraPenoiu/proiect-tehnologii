@@ -1,22 +1,22 @@
-function validationTitlu(r) {
-    let denumire_produs = /[^a-zA-Z]/;
-    r.value = r.value.replace(denumire_produs, "");
+//functie care valideaza titlul anuntului
+function validationText(r) {
+    let titlu = /[^a-zA-Z ]/;
+    r.value = r.value.replace(titlu, "");
 }
 
-//functie care valideaza um (doar cifre)
-function validationUM(r) {
-    let um = /[^1-9]/;
-    r.value = r.value.replace(um, "");
+//functie care valideaza continutul anuntului
+function validationContinut(r) {
+    let continut = /[^a-zA-Z0-9!&'?_`{|}():=. ]/;
+    r.value = r.value.replace(continut, "");
 }
 
-//functie care valideaza cantitatea (doar cifre)
-function validationCantitate(r) {
-    let cantitate = /[^1-9]/;
-    r.value = r.value.replace(cantitate, "");
-}
-
-//functie care valideaza pretul unitar (doar cifre)
-function validationPretUnitar(r) {
-    let pret_unitar = /[^1-9]/;
-    r.value = r.value.replace(pret_unitar, "");
+//functie care valideaza nota per subiect
+function validationNota(r) {
+    let nota = /[^0-9]/;
+    r.value = r.value.replace(nota, "");
+    if(r.value > 100){
+        r.value = r.value.replace(r.value, "");
+    } else if(r.value <= 0){
+        r.value = r.value.replace(r.value, "");
+    }
 }
