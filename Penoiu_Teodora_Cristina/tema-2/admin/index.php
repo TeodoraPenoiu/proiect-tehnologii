@@ -167,7 +167,7 @@ if (isset($comanda)) {
                 $sub_1 = isset($_REQUEST["sub_1"]) ? $_REQUEST["sub_1"] : NULL;
                 $sub_2 = isset($_REQUEST["sub_2"]) ? $_REQUEST["sub_2"] : NULL;
                 $sub_3 = isset($_REQUEST["sub_3"]) ? $_REQUEST["sub_3"] : NULL;
-                $general = ($sub_1 + $sub_2 + $sub_3)/3;
+                $general = ((int)$sub_1 + (int)$sub_2 + (int)$sub_3)/3;
 
                 //Validam parametri primiti.
                 $valid = true;
