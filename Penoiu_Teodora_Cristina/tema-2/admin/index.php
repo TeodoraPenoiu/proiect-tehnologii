@@ -23,17 +23,39 @@
         }
     </style>
 
+    <script src="../validare.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function validezaForm1() {
+            var frm = document.adauga_anunt;
+            var valid = true;
+            if (frm.titlu.value.length < 2) {
+                alert("Titlul trebuie sa aiba minim 2 caractere");
+                frm.nume.focus();
+                valid = false;
+            } else if (frm.titlu.value.length > 30) {
+                alert("Titlul trebuie sa aiba maxim 20 caractere");
+                frm.nume.focus();
+                valid = false;
+            }
+            if (frm.paragraf.value.length < 10) {
+                alert("Continutul trebuie sa aiba minim 10 caractere");
+                frm.nume.focus();
+                valid = false;
+            } else if (frm.paragraf.value.length > 30) {
+                alert("Continutul trebuie sa aiba maxim 20 caractere");
+                frm.nume.focus();
+                valid = false;
+            }
+            return valid;
+        }
+    </script>
+
 </head>
 
 <body>
-<header class="mb-auto">
-    <div class="container">
-        <img src="../../tema-1/B/assets/img/logo.png" class="header-logo" alt="sigla concurs">
-    </div>
-</header>
 
 <main>
-
 <?php
 session_start();
 require_once "../inc/configuration.php";
@@ -293,6 +315,10 @@ if (isset($comanda)) {
         }
 
         if (!isLogged()) {
+            print("<header class='mb-auto'>");
+            print("<div class='container'>");
+            print("<a href='../../tema-1/B/home.html'><img src='../../tema-1/B/assets/img/logo.png' class='header-logo' alt='sigla concurs'></a>");
+            print("</div></header>");
             include "login.php";
         } else {
             print("<div class='container'>");
@@ -319,7 +345,7 @@ if (isset($comanda)) {
             print("<div class='container'>");
             print("<div class='float-start'>");
             print("<a class='nav-link' data-bs-toggle='collapse' href='#adauga-anunturi' aria-expanded='false'><h2>Adauga un anunt</h2></a>");
-            print("<form class='collapse' action='' method='post' id='adauga-anunturi'>");
+            print("<form name='adauga_anunt' onsubmit='return validezaForm1()' class='collapse' action='' method='post' id='adauga-anunturi'>");
             print("<input name='comanda' type='hidden' value='add-anunturi'>");
             print("<p>Titlu:");
             print("<input type='text' name='titlu' value='");

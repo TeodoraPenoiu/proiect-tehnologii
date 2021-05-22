@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE FISA SYSTEM "fisa-inscriere.dtd">
 
-<FISA>
-    <ELEV cnp="1234567891234">
+<FISA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="fisa-inscriere.xsd">
+    <NUME_FACULTATE>Facultatea de Stiinte</NUME_FACULTATE>
+    <CANDIDAT cnp="1234567891234">
         <NUME>Popescu</NUME>
         <PRENUME>Maria</PRENUME>
-        <CLASA>5</CLASA>
-        <SECTIUNEA>incepator</SECTIUNEA>
-        <EMAIL>popescu_mariaabcd@yahoo.com</EMAIL>
-    </ELEV>
+        <SEXUL>F</SEXUL>
+        <NATIONALITATE>ROMANA</NATIONALITATE>
+        <INITIALA_TATA>M</INITIALA_TATA>
+        <DATA_NASTERII>5-11-1998</DATA_NASTERII>
+        <TELEFON>0770563250</TELEFON>
+        <EMAIL>popescu_maria98@yahoo.com</EMAIL>
+        <ADRESA>
+            <TARA>ROMANIA</TARA>
+            <JUDET>DOLJ</JUDET>
+            <ORAS>CRAIOVA</ORAS>
+            <STRADA>1 MAI</STRADA>
+            <BLOC>12B</BLOC>
+            <APARTAMENT>1</APARTAMENT>
+        </ADRESA>
+        <BACALAUREAT>
+            <NOTA disciplina="romana" examinare="scris">9</NOTA>
+            <NOTA disciplina="matematica" examinare="scris">9</NOTA>
+            <NOTA disciplina="biologie" examinare="scris">9</NOTA>
+            <MEDIA_GENERALA>9</MEDIA_GENERALA>
+        </BACALAUREAT>
+        <SPECIALIZARE>INFORMATICA</SPECIALIZARE>
+        <OPTIUNE_INSCRIERE>buget</OPTIUNE_INSCRIERE>
+        <MODUL_PSIHOPEDAGOGIC>NU</MODUL_PSIHOPEDAGOGIC>
+    </CANDIDAT>
 </FISA>

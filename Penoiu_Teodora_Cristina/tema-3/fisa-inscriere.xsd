@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="FISA">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NUME_FACULTATE" type="xs:string"/>
+                <xs:element name="CANDIDAT" type="candidatType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="candidatType">
+        <xs:sequence>
+            <xs:element name="NUME" type="xs:string"/>
+            <xs:element name="PRENUME" type="xs:string"/>
+            <xs:element name="SEXUL" type="xs:string"/>
+            <xs:element name="NATIONALITATE" type="xs:string"/>
+            <xs:element name="INITIALA_TATA" type="xs:string"/>
+            <xs:element name="DATA_NASTERII" type="xs:date"/>
+            <xs:element name="TELEFON" type="telefonType"/>
+            <xs:element name="EMAIL" type="xs:string" minOccurs="0"/>
+            <xs:element name="ADRESA" type="adresatype"/>
+            <xs:element name="BACALAUREAT" type="bacType"/>
+            <xs:element name="SPECIALIZARE" type="xs:string" minOccurs="0"/>
+            <xs:element name="OPTIUNE_INSCRIERE" type="xs:string" minOccurs="0"/>
+            <xs:element name="MODUL_PSIHOPEDAGOGIC" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="cnp" type="cnpType" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="telefonType">
+            <xs:restriction base="xs:string">
+                <!-- <xs:length value="10"/> -->
+                <xs:pattern value="[0-9]{10}"/>
+            </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="adresatype">
+        <xs:sequence>
+            <xs:element name="TARA" type="xs:string"/>
+            <xs:element name="JUDET" type="xs:string"/>
+            <xs:element name="ORAS" type="xs:string"/>
+            <xs:element name="STRADA" type="stradaType"/>
+            <xs:element name="BLOC" type="xs:string"/>
+            <xs:element name="APARTAMENT" type="xs:int" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="stradaType">
+        <xs:simpleContent>
+            <xs:extension base="stradaNrType">
+                <xs:attribute name="nr" type="nrType"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="stradaNrType">
+        <xs:restriction base="xs:string">
+            <xs:length value="13"/>
+            <xs:pattern value="[0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="nrType">
+        <xs:restriction base="xs:string">
+            <xs:length value="13"/>
+            <xs:pattern value="[0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="bacType">
+        <xs:sequence>
+            <xs:element name="NOTA" minOccurs="0" maxOccurs="3" type="notaBacType"/>
+            <xs:element name="MEDIA_GENERALA" minOccurs="0" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="notaBacType">
+        <xs:simpleContent>
+            <xs:extension base="notaType">
+                <xs:attribute name="disciplina" type="xs:string" use="required"/>
+                <xs:attribute name="examinare" type="examinareType" default="scris"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="notaType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="examinareType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="oral"/>
+            <xs:enumeration value="scris"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="cnpType">
+        <xs:restriction base="xs:string">
+            <xs:length value="13"/>
+            <xs:pattern value="[0-9]{13}"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
