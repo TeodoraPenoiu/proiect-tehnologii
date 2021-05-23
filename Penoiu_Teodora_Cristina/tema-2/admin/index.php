@@ -100,18 +100,30 @@ if (isset($comanda)) {
                 $titlu = $_POST['titlu'];
                 $paragraf = $_POST['paragraf'];
 
-                $edit = mysqli_query($conexiune, "update anunturi set titlu='$titlu', paragraf='$paragraf' where id='$id'");
+                //Validam parametri primiti.
+                $valid = true;
+                if (empty($title)) {
+                    $eroareTitlu = "Titlul nu poate fi vid!";
+                    $valid = false;
+                }
+                if (empty($paragraph)) {
+                    $eroareParagraf = "Mesajul nu poate fi vid!";
+                    $valid = false;
+                }
+                if ($valid) {
+                    $edit = mysqli_query($conexiune, "INSERT INTO anunturi(titlu, paragraf) VALUES (?, ?)");
 
-                if($edit)
-                {
-                    mysqli_close($conexiune); // Close connection
-                    header("location:index.php"); // redirects to all records page
-                    exit;
+                    if (!mysqli_stmt_bind_param($edit, "ss", $title, $paragraph)) {
+                        die('Eroare legare parametri: ' . mysqli_stmt_error($edit));
+                    }
+                    if (!mysqli_stmt_execute($edit)) {
+                        die('Eroare : ' . mysqli_stmt_error($edit));
+                    }
+                    mysqli_stmt_close($edit);
+                    $title = $paragraph = "";
+                    echo "<div class='succes container align-text-center'>Paragraful a fost adaugat cu succes in baza de date.</div>";
                 }
-                else
-                {
-                    echo "Problem updating.";
-                }
+                break;
             }
     }
 }
@@ -235,18 +247,44 @@ if (isset($comanda)) {
                     $sub_3_1 = $_POST['sub_3'];
                     $zece = 10;
 
-                    $edit = mysqli_query($conexiune, "update rezultate set nume='$nume1', prenume='$prenume1',
+                    //Validam parametrii.
+                    $valid = true;
+                    if (empty($nume)) {
+                        $eroareNume = "Numele nu poate fi vid!";
+                        $valid = false;
+                    }
+                    if (empty($prenume)) {
+                        $eroarePrenume = "Prenumele nu poate fi vid!";
+                        $valid = false;
+                    }
+                    if (empty($sub_1)) {
+                        $eroareSub1 = "Nota la subiectul 1 nu poate fi vida!";
+                        $valid = false;
+                    }
+                    if (empty($sub_2)) {
+                        $eroareSub2 = "Nota la subiectul 2 nu poate fi vida!";
+                        $valid = false;
+                    }
+                    if (empty($sub_3)) {
+                        $eroareSub3 = "Nota la subiectul 3 nu poate fi vida!";
+                        $valid = false;
+                    }
+                    if (empty($general)) {
+                        $eroareGeneral = "Prenumele nu poate fi vid!";
+                        $valid = false;
+                    }
+                    if ($valid) {
+
+                        $edit = mysqli_query($conexiune, "update rezultate set nume='$nume1', prenume='$prenume1',
                      sub_1 = $sub_1_1, sub_2 = $sub_2_1, sub_3 = $sub_3_1, general = ($sub_1_1 + $sub_2_1 + $sub_3_1)/3 where id='$id'");
 
-                    if($edit)
-                    {
-                        mysqli_close($conexiune); // Close connection
-                        header("location:index.php"); // redirects to all records page
-                        exit;
-                    }
-                    else
-                    {
-                        echo "Problem updating.";
+                        if ($edit) {
+                            mysqli_close($conexiune); // Close connection
+                            header("location:index.php"); // redirects to all records page
+                            exit;
+                        } else {
+                            echo "Problem updating.";
+                        }
                     }
                 }
         }
