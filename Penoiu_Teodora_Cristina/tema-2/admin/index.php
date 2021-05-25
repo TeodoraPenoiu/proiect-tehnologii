@@ -97,33 +97,25 @@ if (isset($comanda)) {
 
             if (isset($_POST['update'])) // when click on Update button
             {
-                $titlu = $_POST['titlu'];
-                $paragraf = $_POST['paragraf'];
-
-                //Validam parametri primiti.
-                $valid = true;
-                if (empty($title)) {
-                    $eroareTitlu = "Titlul nu poate fi vid!";
-                    $valid = false;
-                }
-                if (empty($paragraph)) {
-                    $eroareParagraf = "Mesajul nu poate fi vid!";
-                    $valid = false;
-                }
-                if ($valid) {
-                    $edit = mysqli_query($conexiune, "INSERT INTO anunturi(titlu, paragraf) VALUES (?, ?)");
-
-                    if (!mysqli_stmt_bind_param($edit, "ss", $title, $paragraph)) {
-                        die('Eroare legare parametri: ' . mysqli_stmt_error($edit));
+                $id = $_GET["id"];
+                $qry = mysqli_query($conexiune, "select * from anunturi where id='$id'"); // select query
+                $data = mysqli_fetch_array($qry); // fetch data
+                if (isset($_POST['update'])) // when click on Update button
+                {
+                    $titlu = $_POST['titlu'];
+                    $paragraf = $_POST['paragraf'];
+                    $edit = mysqli_query($conexiune, "update anunturi set titlu='$titlu', paragraf='$paragraf' where id='$id'");
+                    if($edit)
+                    {
+                        mysqli_close($conexiune); // Close connection
+                        header("location:index.php"); // redirects to all records page
+                        exit;
                     }
-                    if (!mysqli_stmt_execute($edit)) {
-                        die('Eroare : ' . mysqli_stmt_error($edit));
+                    else
+                    {
+                        echo "Problem updating.";
                     }
-                    mysqli_stmt_close($edit);
-                    $title = $paragraph = "";
-                    echo "<div class='succes container align-text-center'>Paragraful a fost adaugat cu succes in baza de date.</div>";
                 }
-                break;
             }
     }
 }
@@ -235,9 +227,7 @@ if (isset($comanda)) {
             case 'edit-rezultate':
                 $id = $_GET["id"];
                 $qry = mysqli_query($conexiune, "select * from rezultate where id='$id'"); // select query
-
                 $data = mysqli_fetch_array($qry); // fetch data
-
                 if (isset($_POST['update'])) // when click on Update button
                 {
                     $nume1 = $_POST['nume'];
@@ -246,45 +236,17 @@ if (isset($comanda)) {
                     $sub_2_1 = $_POST['sub_2'];
                     $sub_3_1 = $_POST['sub_3'];
                     $zece = 10;
-
-                    //Validam parametrii.
-                    $valid = true;
-                    if (empty($nume)) {
-                        $eroareNume = "Numele nu poate fi vid!";
-                        $valid = false;
-                    }
-                    if (empty($prenume)) {
-                        $eroarePrenume = "Prenumele nu poate fi vid!";
-                        $valid = false;
-                    }
-                    if (empty($sub_1)) {
-                        $eroareSub1 = "Nota la subiectul 1 nu poate fi vida!";
-                        $valid = false;
-                    }
-                    if (empty($sub_2)) {
-                        $eroareSub2 = "Nota la subiectul 2 nu poate fi vida!";
-                        $valid = false;
-                    }
-                    if (empty($sub_3)) {
-                        $eroareSub3 = "Nota la subiectul 3 nu poate fi vida!";
-                        $valid = false;
-                    }
-                    if (empty($general)) {
-                        $eroareGeneral = "Prenumele nu poate fi vid!";
-                        $valid = false;
-                    }
-                    if ($valid) {
-
-                        $edit = mysqli_query($conexiune, "update rezultate set nume='$nume1', prenume='$prenume1',
+                    $edit = mysqli_query($conexiune, "update rezultate set nume='$nume1', prenume='$prenume1',
                      sub_1 = $sub_1_1, sub_2 = $sub_2_1, sub_3 = $sub_3_1, general = ($sub_1_1 + $sub_2_1 + $sub_3_1)/3 where id='$id'");
-
-                        if ($edit) {
-                            mysqli_close($conexiune); // Close connection
-                            header("location:index.php"); // redirects to all records page
-                            exit;
-                        } else {
-                            echo "Problem updating.";
-                        }
+                    if($edit)
+                    {
+                        mysqli_close($conexiune); // Close connection
+                        header("location:index.php"); // redirects to all records page
+                        exit;
+                    }
+                    else
+                    {
+                        echo "Problem updating.";
                     }
                 }
         }
@@ -382,18 +344,14 @@ if (isset($comanda)) {
             print("<a class='nav-link' data-bs-toggle='collapse' href='#update-anunturi' aria-expanded='false'><h2>Update Data</h2></a>");
             print("<form class='collapse' action='' method='POST' id='update-anunturi'>");
             print("<p>Titlu:<br>");
-            if(!empty($data)) {
-                print("<input type='text' onkeyup='validationTitlu(this)' name='titlu' value='");
-                print($data['titlu']);
-                print("'>");
-            }
+            print("<input type='text' onkeyup='validationTitlu(this)' name='titlu' value='");
+            print($data['titlu']);
+            print("'>");
             print("</p>");
             print("<p>Continut:<br>");
-            if(!empty($data)) {
-                print("<input type='text' onkeyup='validationContinut(this)' name='paragraf' value='");
-                print($data['paragraf']);
-                print("'>");
-            }
+            print("<input type='text' onkeyup='validationContinut(this)' name='paragraf' value='");
+            print($data['paragraf']);
+            print("'>");
             print("</p>");
             print("<input type='submit' name='update' value='Update'>");
             print("</form>");
@@ -487,35 +445,25 @@ if (isset($comanda)) {
             print("<a class='nav-link' data-bs-toggle='collapse' href='#update-data' aria-expanded='false'><h3>Update Data</h3></a>");
             print("<form class='collapse' action='' method='POST' id='update-data'>");
             print("<p>Nume:<br>");
-            if(!empty($data)) {
-                print("<input type='text' onkeyup='validationText(this)' name='nume' value='");
-                print($data['nume']);
-                print("' placeholder='...' size='30'>");
-            }
+            print("<input type='text' onkeyup='validationText(this)' name='nume' value='");
+            print($data['nume']);
+            print("' placeholder='...' size='30'>");
             print("</p>Prenume:<br>");
-            if(!empty($data)) {
-                print("<input type='text' onkeyup='validationContinut(this)' name='prenume' value='");
-                print($data['prenume']);
-                print("' placeholder='...' size='30'>");
-            }
+            print("<input type='text' onkeyup='validationContinut(this)' name='prenume' value='");
+            print($data['prenume']);
+            print("' placeholder='...' size='30'>");
             print("</p>Nota la subiectul I:<br>");
-            if(!empty($data)) {
-                print("<input type='text' onkeyup='validationNota(this)' name='sub_1' value='");
-                print($data['sub_1']);
-                print("' placeholder='...' size='30'>");
-            }
+            print("<input type='text' onkeyup='validationNota(this)' name='sub_1' value='");
+            print($data['sub_1']);
+            print("' placeholder='...' size='30'>");
             print("</p>Nota la subiectul II:<br>");
-            if(!empty($data)) {
-                print("<input type='text' onkeyup='validationNota(this)' name='sub_2' value='");
-                print($data['sub_2']);
-                print("' placeholder='...' size='30'>");
-            }
+            print("<input type='text' onkeyup='validationNota(this)' name='sub_2' value='");
+            print($data['sub_2']);
+            print("' placeholder='...' size='30'>");
             print("</p>Nota la subiectul III:<br>");
-            if(!empty($data)) {
-                print("<input type='text' onkeyup='validationNota(this)' name='sub_3' value='");
-                print($data['sub_3']);
-                print("' placeholder='...' size='30'>");
-            }
+            print("<input type='text' onkeyup='validationNota(this)' name='sub_3' value='");
+            print($data['sub_3']);
+            print("' placeholder='...' size='30'>");
             print("<input type='submit' name='update' value='Update'>");
             print("</form>");
             print("</div>");
